@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画库 - 动画艺术乐园</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/library.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <!-- 与首页相同的导航栏 -->
+        <div class="nav-container">
+            <a href="index.html" class="logo">动画艺术乐园</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="library.html" class="nav-link active">动画库</a>
+                <a href="ai-chat.html" class="nav-link">AI小灵</a>
+                <a href="workshop.html" class="nav-link">创意工坊</a>
+                <a href="community.html" class="nav-link">社区</a>
+            </div>
+            <div class="user-menu">
+                <div class="user-avatar" onclick="location.href='profile.html'">
+                    <img src="images/avatars/default-avatar.png" alt="用户头像">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="library-container">
+        <!-- 筛选栏 -->
+        <div class="filter-bar">
+            <div class="filter-section">
+                <h3>类型</h3>
+                <div class="filter-tags">
+                    <span class="filter-tag active">全部</span>
+                    <span class="filter-tag">热血</span>
+                    <span class="filter-tag">治愈</span>
+                    <span class="filter-tag">科幻</span>
+                    <span class="filter-tag">奇幻</span>
+                    <span class="filter-tag">恋爱</span>
+                    <span class="filter-tag">搞笑</span>
+                    <span class="filter-tag">悬疑</span>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>年代</h3>
+                <div class="filter-tags">
+                    <span class="filter-tag active">全部</span>
+                    <span class="filter-tag">2024</span>
+                    <span class="filter-tag">2020-2023</span>
+                    <span class="filter-tag">2010-2019</span>
+                    <span class="filter-tag">2000-2009</span>
+                    <span class="filter-tag">90年代</span>
+                    <span class="filter-tag">更早</span>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>AI智能筛选</h3>
+                <div class="ai-filter">
+                    <input type="text" placeholder="输入你的心情或需求...">
+                    <button class="btn-ai-small"><i class="fas fa-magic"></i> AI推荐</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 动画网格 -->
+        <div class="anime-grid" id="animeGrid">
+            <!-- 动态加载 -->
+        </div>
+
+        <!-- 加载更多 -->
+        <div class="load-more">
+            <button class="btn btn-secondary" id="loadMoreBtn">加载更多</button>
+        </div>
+    </main>
+
+    <!-- 动画详情模态框 -->
+    <div class="anime-modal" id="animeModal" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <div class="modal-body" id="modalBody">
+                <!-- 动态加载详情 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/library.js"></script>
+</body>
+</html>

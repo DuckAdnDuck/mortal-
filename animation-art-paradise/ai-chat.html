@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>动画小灵 - AI智能问答</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/ai-chat.css">
+		<link rel="stylesheet" href="css/responsive.css">
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<!-- 与首页相同的导航栏 -->
+			<div class="nav-container">
+				<a href="index.html" class="logo">动画艺术乐园</a>
+				<div class="nav-links">
+					<a href="index.html" class="nav-link">首页</a>
+					<a href="library.html" class="nav-link">动画库</a>
+					<a href="ai-chat.html" class="nav-link active">AI小灵</a>
+					<a href="workshop.html" class="nav-link">创意工坊</a>
+					<a href="community.html" class="nav-link">社区</a>
+				</div>
+				<div class="user-menu">
+					<div class="user-avatar" onclick="location.href='profile.html'">
+						<img src="images/avatars/default-avatar.png" alt="用户头像"
+							style="width:100%; height:100%; border-radius:50%;">
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- AI对话主界面 -->
+		<div class="ai-chat-container">
+			<!-- 侧边栏 -->
+			<div class="chat-sidebar">
+				<div class="sidebar-header">
+					<h3>✨ 动画小灵</h3>
+					<button class="new-chat-btn" id="newChatBtn">
+						<i class="fas fa-plus"></i> 新对话
+					</button>
+				</div>
+
+				<div class="sidebar-search">
+					<i class="fas fa-search"></i>
+					<input type="text" placeholder="搜索对话...">
+				</div>
+
+				<div class="chat-history">
+					<div class="history-item active">
+						<i class="fas fa-comment"></i>
+						<div class="history-info">
+							<div class="history-title">动画推荐讨论</div>
+							<div class="history-time">刚刚</div>
+						</div>
+					</div>
+					<div class="history-item">
+						<i class="fas fa-comment"></i>
+						<div class="history-info">
+							<div class="history-title">角色设计咨询</div>
+							<div class="history-time">2小时前</div>
+						</div>
+					</div>
+					<div class="history-item">
+						<i class="fas fa-comment"></i>
+						<div class="history-info">
+							<div class="history-title">剧情构思</div>
+							<div class="history-time">昨天</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="sidebar-footer">
+					<div class="ai-status">
+						<span class="status-dot online"></span>
+						模型: 创意大师
+					</div>
+					<div class="token-usage">
+						已使用 <span>234</span>/1000 tokens
+					</div>
+				</div>
+			</div>
+
+			<!-- 主聊天区域 -->
+			<div class="chat-main">
+				<!-- AI助手头部 -->
+				<div class="chat-header gradient-ai">
+					<img src="images/ai-images/ai-avatar.png" class="ai-avatar floating" alt="AI助手">
+					<div class="ai-title">
+						<h2>动画小灵</h2>
+						<span class="ai-status online">在线 · 创意模式</span>
+					</div>
+					<div class="ai-model-select">
+						<select id="modelSelect" class="model-select">
+							<option value="general">知识达人</option>
+							<option value="roleplay" selected>角色扮演</option>
+							<option value="creative">创意大师</option>
+						</select>
+					</div>
+					<div class="chat-actions">
+						<button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+					</div>
+				</div>
+
+				<!-- 对话区域 -->
+				<div class="chat-messages" id="chatMessages">
+					<!-- 欢迎消息 -->
+					<div class="message ai-message">
+						<div class="message-avatar">
+							<img src="./images/ai-images/ai-avatar-small.png" alt="AI">
+						</div>
+						<div class="message-content">
+							<div class="message-bubble ai-bubble">
+								你好呀！我是动画小灵✨ 我可以帮你推荐动画、分析角色、构思剧情，还可以扮演你喜欢的动画角色哦！有什么想聊的吗？
+							</div>
+							<div class="message-time">刚刚</div>
+						</div>
+					</div>
+
+					<!-- 快捷提问卡片 -->
+					<div class="quick-questions">
+						<div class="quick-question-card" data-question="推荐几部治愈系动画">
+							<i class="fas fa-heart"></i>
+							<span>治愈系推荐</span>
+						</div>
+						<div class="quick-question-card" data-question="帮我设计一个魔法少女角色">
+							<i class="fas fa-wand-magic"></i>
+							<span>角色设计</span>
+						</div>
+						<div class="quick-question-card" data-question="扮演宫崎骏风格">
+							<i class="fas fa-dragon"></i>
+							<span>角色扮演</span>
+						</div>
+						<div class="quick-question-card" data-question="分析一下你的名字">
+							<i class="fas fa-film"></i>
+							<span>动画分析</span>
+						</div>
+						<div class="quick-question-card" data-question="帮我写一段告白台词">
+							<i class="fas fa-pen"></i>
+							<span>台词创作</span>
+						</div>
+						<div class="quick-question-card" data-question="续写这个剧情：">
+							<i class="fas fa-arrow-trend-up"></i>
+							<span>剧情续写</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- 输入区域 -->
+				<div class="chat-input-area">
+					<button class="input-action-btn" id="attachBtn">
+						<i class="fas fa-paperclip"></i>
+					</button>
+					<div class="input-wrapper">
+						<textarea id="messageInput" placeholder="和动画小灵聊聊吧..." rows="1"></textarea>
+						<button class="emoj-btn">
+							<i class="far fa-smile"></i>
+						</button>
+					</div>
+					<button class="send-btn" id="sendMessage">
+						<i class="fas fa-paper-plane"></i>
+					</button>
+				</div>
+
+				<!-- 角色扮演快捷栏（角色扮演模式下显示） -->
+				<div class="roleplay-bar" id="roleplayBar" style="display: none;">
+					<div class="roleplay-title">选择你想对话的角色：</div>
+					<div class="roleplay-characters">
+						<div class="character-chip active" data-role="totoro">
+							<img src="images/characters/totoro-icon.png" alt="龙猫">
+							<span>龙猫</span>
+						</div>
+						<div class="character-chip" data-role="chihiro">
+							<img src="images/characters/chihiro-icon.png" alt="千寻">
+							<span>千寻</span>
+						</div>
+						<div class="character-chip" data-role="howl">
+							<img src="images/characters/howl-icon.png" alt="哈尔">
+							<span>哈尔</span>
+						</div>
+						<div class="character-chip" data-role="mononoke">
+							<img src="images/characters/mononoke-icon.png" alt="幽灵公主">
+							<span>幽灵公主</span>
+						</div>
+						<div class="character-chip" data-role="nezuko">
+							<img src="images/characters/nezuko-icon.png" alt="祢豆子">
+							<span>祢豆子</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 右侧信息面板 -->
+			<div class="chat-info-panel">
+				<div class="info-section">
+					<h4>今日推荐</h4>
+					<div class="recommend-item">
+						<img src="images/animations/recommend1.jpg" alt="推荐动画">
+						<div class="recommend-info">
+							<div class="recommend-title">天空之城</div>
+							<div class="recommend-desc">经典宫崎骏作品</div>
+						</div>
+					</div>
+					<div class="recommend-item">
+						<img src="images/animations/recommend2.jpg" alt="推荐动画">
+						<div class="recommend-info">
+							<div class="recommend-title">你的名字。</div>
+							<div class="recommend-desc">新海诚代表作</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="info-section">
+					<h4>热门话题</h4>
+					<div class="hot-topic">
+						<span class="tag tag-pink">#新番推荐</span>
+						<span class="hot-count">234人讨论</span>
+					</div>
+					<div class="hot-topic">
+						<span class="tag tag-blue">#宫崎骏</span>
+						<span class="hot-count">189人讨论</span>
+					</div>
+					<div class="hot-topic">
+						<span class="tag tag-ai">#AI创作</span>
+						<span class="hot-count">156人讨论</span>
+					</div>
+				</div>
+
+				<div class="info-section">
+					<h4>AI能力</h4>
+					<div class="ai-capability">
+						<div class="capability-item">
+							<i class="fas fa-robot"></i>
+							<span>动画知识库</span>
+						</div>
+						<div class="capability-item">
+							<i class="fas fa-pen-fancy"></i>
+							<span>创作辅助</span>
+						</div>
+						<div class="capability-item">
+							<i class="fas fa-mask"></i>
+							<span>角色扮演</span>
+						</div>
+						<div class="capability-item">
+							<i class="fas fa-magic"></i>
+							<span>灵感生成</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 语音输入模态框（可选） -->
+		<div class="voice-modal" id="voiceModal" style="display: none;">
+			<div class="voice-modal-content">
+				<div class="voice-wave">
+					<span></span><span></span><span></span><span></span><span></span>
+				</div>
+				<p>正在聆听...</p>
+				<button class="btn btn-primary" id="stopVoice">停止</button>
+			</div>
+		</div>
+
+		<script src="js/websocket.js"></script>
+		<script src="js/ai-chat.js"></script>
+	</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社区 - 动画艺术乐园</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">动画艺术乐园</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="library.html" class="nav-link">动画库</a>
+                <a href="ai-chat.html" class="nav-link">AI小灵</a>
+                <a href="workshop.html" class="nav-link">创意工坊</a>
+                <a href="community.html" class="nav-link active">社区</a>
+            </div>
+            <div class="user-menu">
+                <div class="user-avatar" onclick="location.href='profile.html'">
+                    <img src="images/avatars/default-avatar.png" alt="用户头像">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 社区主界面 -->
+    <div class="community-container">
+        <div class="community-header">
+            <h1>动画爱好者社区</h1>
+            <p>和同好一起分享你的热爱</p>
+            
+            <div class="community-actions">
+                <button class="btn btn-primary" id="createPostBtn">
+                    <i class="fas fa-pen"></i> 发布帖子
+                </button>
+                <button class="btn btn-secondary" id="aiTopicBtn">
+                    <i class="fas fa-robot"></i> AI生成话题
+                </button>
+            </div>
+        </div>
+
+        <div class="community-layout">
+            <!-- 左侧 - 帖子列表 -->
+            <div class="posts-section">
+                <div class="posts-filter">
+                    <button class="filter-btn active" data-filter="latest">最新</button>
+                    <button class="filter-btn" data-filter="hot">热门</button>
+                    <button class="filter-btn" data-filter="following">关注</button>
+                    <button class="filter-btn" data-filter="ai">AI精选</button>
+                </div>
+
+                <div class="posts-list" id="postsList">
+                    <!-- 动态加载帖子 -->
+                </div>
+
+                <div class="load-more">
+                    <button class="btn btn-secondary" id="loadMorePosts">加载更多</button>
+                </div>
+            </div>
+
+            <!-- 右侧 - 侧边栏 -->
+            <div class="community-sidebar">
+                <!-- 热门话题 -->
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-fire"></i> 热门话题</h3>
+                    <div class="hot-topics" id="hotTopics">
+                        <!-- 动态加载 -->
+                    </div>
+                    <button class="btn-ai-small" id="generateTopic">
+                        <i class="fas fa-magic"></i> AI生成话题
+                    </button>
+                </div>
+
+                <!-- 活跃用户 -->
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-users"></i> 活跃用户</h3>
+                    <div class="active-users" id="activeUsers">
+                        <!-- 动态加载 -->
+                    </div>
+                </div>
+
+                <!-- 每周挑战 -->
+                <div class="sidebar-card challenge-card">
+                    <h3><i class="fas fa-trophy"></i> 每周挑战</h3>
+                    <div class="challenge-content">
+                        <h4>画出一个夏天的回忆</h4>
+                        <p>用画笔记录你记忆中最美好的夏天</p>
+                        <div class="challenge-progress">
+                            <div class="progress-bar" style="width: 67%"></div>
+                            <span>67% 已完成</span>
+                        </div>
+                        <button class="btn btn-primary btn-small">参与挑战</button>
+                    </div>
+                </div>
+
+                <!-- AI推荐 -->
+                <div class="sidebar-card ai-card">
+                    <h3><i class="fas fa-robot"></i> AI推荐话题</h3>
+                    <div class="ai-recommendations" id="aiRecommendations">
+                        <!-- 动态加载 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 发布帖子模态框 -->
+    <div class="modal" id="postModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>发布新帖子</h2>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="postForm">
+                    <div class="form-group">
+                        <label>标题</label>
+                        <input type="text" id="postTitle" placeholder="输入标题...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>内容</label>
+                        <textarea id="postContent" placeholder="分享你的想法..." rows="6"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>标签</label>
+                        <input type="text" id="postTags" placeholder="用逗号分隔多个标签">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>图片</label>
+                        <div class="image-upload-area" id="imageUploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>点击或拖拽上传图片</p>
+                            <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;">
+                        </div>
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="aiReview"> 邀请AI点评
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+                <button class="btn btn-primary" id="submitPost">发布</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 帖子详情模态框 -->
+    <div class="modal" id="postDetailModal" style="display: none;">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="detailTitle"></h2>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="postDetailBody">
+                <!-- 动态加载帖子详情 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/community.js"></script>
+</body>
+</html>

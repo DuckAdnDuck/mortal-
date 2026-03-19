@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画艺术乐园 - 梦幻动画创意社区</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<!-- 宠物css -->
+	<style>
+	#pet {
+	    position: fixed;
+	    width: 150px; /* 👈 改这里（推荐 30~50） */
+	    pointer-events: none;
+	    transition: transform 0.1s linear;
+	}
+	</style>
+</head>
+<body>
+	
+	
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">动画艺术乐园</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">首页</a>
+                <a href="library.html" class="nav-link">动画库</a>
+                <a href="ai-chat.html" class="nav-link">AI小灵</a>
+                <a href="workshop.html" class="nav-link">创意工坊</a>
+                <a href="community.html" class="nav-link">社区</a>
+            </div>
+            <div class="user-menu">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="搜索动画、角色...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-avatar" onclick="location.href='profile.html'">
+                    <img src="images/avatars/default-avatar.png" alt="用户头像" style="width:100%; height:100%; border-radius:50%;">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main>
+        <!-- 轮播区域 -->
+        <section class="hero-carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active" style="background-image: linear-gradient(135deg, rgba(255,182,193,0.9), rgba(135,206,235,0.9)), url('images/backgrounds/hero-bg1.jpg')">
+                    <div class="carousel-content">
+                        <h1 class="carousel-title">探索动画的无限可能</h1>
+                        <p class="carousel-desc">与AI助手一起，发现你喜爱的动画世界</p>
+                        <div class="carousel-buttons">
+                            <a href="library.html" class="btn btn-primary">开始探索</a>
+                            <a href="ai-chat.html" class="btn btn-secondary">与AI聊聊</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: linear-gradient(135deg, rgba(255,192,203,0.9), rgba(176,224,230,0.9)), url('images/backgrounds/hero-bg2.jpg')">
+                    <div class="carousel-content">
+                        <h1 class="carousel-title">创意工坊 · 释放灵感</h1>
+                        <p class="carousel-desc">AI辅助创作，让每个创意都闪闪发光</p>
+                        <div class="carousel-buttons">
+                            <a href="workshop.html" class="btn btn-primary">开始创作</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- 热门推荐 -->
+        <section class="container" style="margin-top: 4rem;">
+            <h2 class="section-title">热门推荐</h2>
+            <div class="recommendation-grid" id="hotAnimations">
+                <!-- 动态加载动画卡片 -->
+            </div>
+        </section>
+
+        <!-- AI助手快捷入口 -->
+        <section class="ai-quick-access" style="background: var(--gradient-ai); padding: 4rem 0; margin: 4rem 0;">
+            <div class="container">
+                <div class="ai-quick-content" style="display: flex; align-items: center; gap: 4rem;">
+                    <div class="ai-quick-text">
+                        <h2 style="font-size: 2.5rem; color: white; margin-bottom: 1rem;">✨ 动画小灵 · 你的专属AI助手</h2>
+                        <p style="color: white; font-size: 1.2rem; margin-bottom: 2rem;">懂动画、会创作、能聊天，让每个动画梦想都触手可及</p>
+                        <div class="ai-features" style="display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-bottom: 2rem;">
+                            <span style="color: white;"><i class="fas fa-robot"></i> 智能问答</span>
+                            <span style="color: white;"><i class="fas fa-pen-fancy"></i> 创作辅助</span>
+                            <span style="color: white;"><i class="fas fa-mask"></i> 角色扮演</span>
+                            <span style="color: white;"><i class="fas fa-magic"></i> 灵感生成</span>
+                        </div>
+                        <a href="ai-chat.html" class="btn btn-primary" style="background: white; color: var(--ai-purple);">立即对话 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="ai-quick-avatar" style="animation: float 3s ease-in-out infinite;">
+                        <img src="images/ai-avatar-large.png" alt="AI助手" style="width: 300px; border-radius: 50%; box-shadow: var(--ai-glow);">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新资讯 -->
+        <section class="container">
+            <h2 class="section-title">动画资讯</h2>
+            <div class="news-grid" id="latestNews">
+                <!-- 动态加载资讯卡片 -->
+            </div>
+        </section>
+
+        <!-- 社区精选 -->
+        <section class="container" style="margin-top: 4rem;">
+            <h2 class="section-title">社区精选</h2>
+            <div class="community-showcase" id="communityPosts">
+                <!-- 动态加载社区作品 -->
+            </div>
+        </section>
+    </main>
+
+    <!-- AI助手浮动按钮 -->
+    <div class="ai-assistant-float">
+        <button class="ai-float-btn" onclick="location.href='ai-chat.html'">
+            <img src="images/icons/ai-icon.png" alt="AI助手">
+        </button>
+        <span class="ai-tooltip">和小灵聊聊？</span>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>动画艺术乐园</h3>
+                <p>一个充满梦幻色彩的动画创意社区</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" style="color: var(--primary-pink); margin-right: 1rem;"><i class="fab fa-weixin"></i></a>
+                    <a href="#" style="color: var(--primary-blue); margin-right: 1rem;"><i class="fab fa-weibo"></i></a>
+                    <a href="#" style="color: var(--ai-purple);"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="library.html">动画库</a></li>
+                    <li><a href="ai-chat.html">AI助手</a></li>
+                    <li><a href="workshop.html">创意工坊</a></li>
+                    <li><a href="community.html">社区</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>帮助支持</h3>
+                <ul>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">用户协议</a></li>
+                    <li><a href="#">隐私政策</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>下载APP</h3>
+                <p>扫描二维码下载移动端</p>
+                <div style="width: 100px; height: 100px; background: #ddd; margin-top: 0.5rem;"></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 动画艺术乐园. 让每一帧都充满艺术.</p>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+	<script>
+	    // 页面淡入
+	    $("body").css("display", "none").fadeIn(1000);
+		let user = JSON.parse(localStorage.getItem("user"));
+	</script>
+	<!-- 跟随宠物 -->
+	<img id="pet" src="images/小狗.gif">
+	<!-- 宠物设置 -->
+	<script>
+	let pet = document.getElementById("pet");
+	
+	let mouseX = 0;
+	let mouseY = 0;
+	
+	let petX = 0;
+	let petY = 0;
+	
+	// 获取鼠标位置
+	document.addEventListener("mousemove", function(e) {
+	    mouseX = e.clientX;
+	    mouseY = e.clientY;
+	});
+	
+	// 动画循环（关键！）
+	function animate() {
+	    let dx = mouseX - petX;
+	
+	    petX += (mouseX - petX) * 0.02;
+	    petY += (mouseY - petY) * 0.02;
+	
+	    // 👇 根据方向翻转
+	    if (dx < 0) {
+	        pet.style.transform = "scaleX(1)";
+	    } else {
+	        pet.style.transform = "scaleX(-1)";
+	    }
+	
+	    pet.style.left = (petX - 60) + "px"; // 👈 往左偏一点
+	    pet.style.top = (petY - 50) + "px";  // 👈 往上偏一点
+	
+	    requestAnimationFrame(animate);
+	}
+	
+	animate();
+	</script>
+</body>
+<script>
+	<script>
+		 let user = JSON.parse(localStorage.getItem("user"));
+		
+		    if (user) {
+		        document.getElementById("username").innerText = user.username;
+		    } else {
+		        // 没登录，跳回登录页
+		        window.location.href = "login.html";
+		    }
+		
+		    function logout() {
+		        localStorage.removeItem("user");
+		        window.location.href = "login.html";
+		    }
+	</script>
+</script>
+</html>

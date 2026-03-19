@@ -1,0 +1,600 @@
+/* 个人中心样式 */
+
+.profile-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* 侧边栏 */
+.profile-sidebar {
+    background: white;
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: var(--soft-shadow);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.user-card {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-avatar-large {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+}
+
+.user-avatar-large img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: var(--soft-shadow);
+}
+
+.change-avatar-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--gradient-sunset);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.change-avatar-btn:hover {
+    transform: scale(1.1);
+}
+
+.user-name {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.user-bio {
+    color: #999;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.user-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-pink);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.user-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.badge {
+    padding: 5px 12px;
+    background: #f0f0f0;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.badge-ai {
+    padding: 5px 12px;
+    background: var(--gradient-ai);
+    color: white;
+    border-radius: 30px;
+    font-size: 0.85rem;
+}
+
+.user-ai-stats {
+    background: var(--gradient-soft);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: left;
+}
+
+.user-ai-stats h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ai-purple);
+    margin-bottom: 15px;
+}
+
+.ai-stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.ai-progress {
+    margin-top: 15px;
+    position: relative;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--gradient-ai);
+    border-radius: 10px;
+    transition: width 0.3s;
+}
+
+.ai-progress span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    white-space: nowrap;
+}
+
+.profile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.profile-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 15px;
+    background: transparent;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    text-align: left;
+}
+
+.profile-nav-btn i {
+    width: 20px;
+    color: var(--primary-pink);
+}
+
+.profile-nav-btn:hover {
+    background: rgba(255, 182, 193, 0.1);
+    color: var(--primary-pink);
+}
+
+.profile-nav-btn.active {
+    background: var(--gradient-sunset);
+    color: white;
+}
+
+.profile-nav-btn.active i {
+    color: white;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ff4444;
+    border-radius: 15px;
+    background: transparent;
+    color: #ff4444;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logout-btn:hover {
+    background: #ff4444;
+    color: white;
+}
+
+/* 主内容区域 */
+.profile-content {
+    background: white;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: var(--soft-shadow);
+}
+
+.profile-section {
+    display: none;
+}
+
+.profile-section.active {
+    display: block;
+}
+
+/* 个人资料表单 */
+.profile-form {
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 182, 193, 0.3);
+    border-radius: 15px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.2);
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.interest-tag {
+    padding: 8px 18px;
+    background: #f0f0f0;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.interest-tag:hover {
+    background: rgba(255, 182, 193, 0.3);
+}
+
+.interest-tag.selected {
+    background: var(--primary-pink);
+    color: white;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ai-preferences {
+    background: var(--gradient-soft);
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.ai-preferences h3 {
+    color: var(--ai-purple);
+    margin-bottom: 20px;
+}
+
+.preference-item {
+    margin-bottom: 15px;
+}
+
+.preference-item label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+}
+
+.preference-item select {
+    margin-left: 10px;
+    padding: 8px 15px;
+    border: 1px solid rgba(255, 182, 193, 0.3);
+    border-radius: 10px;
+    outline: none;
+}
+
+/* 收藏和作品网格 */
+.favorites-tabs,
+.works-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+    padding-bottom: 10px;
+}
+
+.favorite-tab,
+.work-tab {
+    padding: 8px 20px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.favorite-tab.active,
+.work-tab.active {
+    color: var(--primary-pink);
+    font-weight: 600;
+}
+
+.favorite-tab.active::after,
+.work-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-sunset);
+    border-radius: 3px;
+}
+
+.favorites-grid,
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.favorite-item,
+.work-item {
+    background: #f8f9fa;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.favorite-item:hover,
+.work-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--soft-shadow);
+}
+
+.favorite-item img,
+.work-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.favorite-info,
+.work-info {
+    padding: 15px;
+}
+
+.favorite-info h4,
+.work-info h4 {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.favorite-info p,
+.work-info p {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* AI对话历史 */
+.ai-history-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.ai-history-search input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid rgba(255, 182, 193, 0.3);
+    border-radius: 30px;
+    outline: none;
+}
+
+.ai-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.history-item {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.history-item:hover {
+    background: var(--gradient-soft);
+}
+
+.history-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-ai);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.history-content {
+    flex: 1;
+}
+
+.history-content h4 {
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.history-content p {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.history-time {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.history-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.history-actions button {
+    padding: 5px 10px;
+    border: none;
+    background: transparent;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.history-actions button:hover {
+    color: var(--primary-pink);
+}
+
+/* 设置 */
+.settings-group {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.settings-group h3 {
+    color: var(--primary-pink);
+    margin-bottom: 20px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 182, 193, 0.1);
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-status {
+    color: #4CAF50;
+    font-size: 0.9rem;
+}
+
+.btn-small {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-danger {
+    background: #ff4444;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #ff6666;
+}
+
+.danger-zone {
+    border-color: #ff4444;
+}
+
+.danger-zone h3 {
+    color: #ff4444;
+}
+
+/* 响应式 */
+@media (max-width: 992px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .favorites-grid,
+    .works-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .history-item {
+        flex-direction: column;
+    }
+    
+    .history-actions {
+        justify-content: flex-end;
+    }
+}

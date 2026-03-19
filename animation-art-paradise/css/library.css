@@ -1,0 +1,294 @@
+/* 动画库页面样式 */
+
+.library-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 筛选栏 */
+.filter-bar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: var(--soft-shadow);
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h3 {
+    color: var(--primary-pink);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-tag {
+    padding: 8px 20px;
+    background: white;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.filter-tag:hover {
+    background: var(--primary-pink);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.filter-tag.active {
+    background: var(--gradient-sunset);
+    color: white;
+    border: none;
+}
+
+.ai-filter {
+    display: flex;
+    gap: 10px;
+}
+
+.ai-filter input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid rgba(255, 182, 193, 0.3);
+    border-radius: 30px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.ai-filter input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(135, 206, 235, 0.2);
+}
+
+.btn-ai-small {
+    padding: 0 25px;
+    background: var(--gradient-ai);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s;
+}
+
+.btn-ai-small:hover {
+    transform: scale(1.05);
+}
+
+/* 动画网格 */
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.anime-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--soft-shadow);
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+}
+
+.anime-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--dream-shadow);
+}
+
+.anime-card-image {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.anime-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.anime-card:hover .anime-card-image img {
+    transform: scale(1.1);
+}
+
+.anime-card-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--gradient-ai);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.anime-card-info {
+    padding: 20px;
+}
+
+.anime-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.anime-card-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.anime-card-rating {
+    color: gold;
+    font-weight: 600;
+}
+
+.anime-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.anime-card-tag {
+    padding: 3px 10px;
+    background: #f0f0f0;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.anime-card-ai {
+    background: var(--gradient-soft);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.anime-card-ai i {
+    color: var(--ai-purple);
+}
+
+/* 加载更多 */
+.load-more {
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* 模态框 */
+.anime-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideUp 0.3s ease;
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    box-shadow: var(--soft-shadow);
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg);
+    background: var(--primary-pink);
+    color: white;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .filter-bar {
+        padding: 15px;
+    }
+    
+    .anime-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
+    
+    .anime-card-image {
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ai-filter {
+        flex-direction: column;
+    }
+    
+    .btn-ai-small {
+        padding: 12px;
+        justify-content: center;
+    }
+}

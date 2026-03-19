@@ -1,0 +1,688 @@
+/* AI聊天页面专用样式 */
+
+.ai-chat-container {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    height: calc(100vh - 80px);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+/* 侧边栏样式 */
+.chat-sidebar {
+    background: rgba(255, 255, 255, 0.8);
+    border-right: 1px solid rgba(255, 182, 193, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.sidebar-header h3 {
+    color: var(--primary-pink);
+    margin-bottom: 15px;
+}
+
+.new-chat-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--gradient-sunset);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.3s;
+}
+
+.new-chat-btn:hover {
+    transform: scale(1.02);
+}
+
+.sidebar-search {
+    padding: 15px 20px;
+    position: relative;
+}
+
+.sidebar-search i {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.sidebar-search input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    border: 1px solid rgba(255, 182, 193, 0.3);
+    border-radius: 30px;
+    outline: none;
+    background: white;
+}
+
+.chat-history {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 5px;
+}
+
+.history-item:hover {
+    background: rgba(255, 182, 193, 0.1);
+}
+
+.history-item.active {
+    background: var(--gradient-soft);
+}
+
+.history-item i {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+}
+
+.history-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.history-title {
+    font-weight: 600;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-time {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.ai-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4CAF50;
+    position: relative;
+}
+
+.status-dot.online::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #4CAF50;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+.token-usage {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.token-usage span {
+    color: var(--primary-pink);
+    font-weight: 600;
+}
+
+/* 主聊天区域 */
+.chat-main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    background: var(--gradient-ai);
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ai-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    animation: float 3s ease-in-out infinite;
+}
+
+.ai-title h2 {
+    font-size: 1.3rem;
+    margin-bottom: 3px;
+}
+
+.ai-status {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.model-select {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    padding: 8px 15px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.model-select option {
+    background: white;
+    color: #333;
+}
+
+.chat-actions {
+    margin-left: 10px;
+}
+
+.action-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 对话消息区域 */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.message {
+    display: flex;
+    gap: 15px;
+    animation: slideIn 0.3s ease;
+}
+
+.message.user-message {
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.message-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message-content {
+    max-width: 70%;
+}
+
+.message-bubble {
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+.user-bubble {
+    background: var(--primary-pink);
+    color: white;
+    border-radius: 20px 20px 5px 20px;
+}
+
+.ai-bubble {
+    background: white;
+    color: #333;
+    border-radius: 20px 20px 20px 5px;
+    box-shadow: var(--soft-shadow);
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* 打字机效果 */
+.typing-indicator {
+    display: flex;
+    gap: 5px;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 20px 20px 20px 5px;
+    box-shadow: var(--soft-shadow);
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-pink);
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+    background: var(--primary-blue);
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+    background: var(--ai-purple);
+}
+
+/* 快捷提问卡片 */
+.quick-questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.quick-question-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: white;
+    border-radius: 30px;
+    box-shadow: var(--soft-shadow);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.quick-question-card:hover {
+    transform: translateY(-2px);
+    background: var(--gradient-soft);
+}
+
+.quick-question-card i {
+    color: var(--primary-pink);
+    font-size: 1rem;
+}
+
+/* 输入区域 */
+.chat-input-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 20px;
+    background: white;
+    border-top: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.input-action-btn {
+    background: transparent;
+    border: none;
+    color: #999;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.input-action-btn:hover {
+    color: var(--primary-pink);
+    background: rgba(255, 182, 193, 0.1);
+}
+
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    background: #f5f5f5;
+    border-radius: 30px;
+    padding: 5px 5px 5px 20px;
+}
+
+.input-wrapper textarea {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 0;
+    max-height: 120px;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.emoj-btn {
+    background: transparent;
+    border: none;
+    color: #999;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.send-btn {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--gradient-sunset);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: var(--soft-shadow);
+}
+
+.send-btn:hover {
+    transform: scale(1.1);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 角色扮演栏 */
+.roleplay-bar {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-top: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.roleplay-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--primary-pink);
+}
+
+.roleplay-characters {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.character-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 70px;
+}
+
+.character-chip img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.character-chip span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.character-chip:hover img {
+    border-color: var(--primary-pink);
+    transform: scale(1.1);
+}
+
+.character-chip.active img {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.5);
+}
+
+/* 右侧信息面板 */
+.chat-info-panel {
+    background: rgba(255, 255, 255, 0.8);
+    border-left: 1px solid rgba(255, 182, 193, 0.3);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.info-section {
+    margin-bottom: 30px;
+}
+
+.info-section h4 {
+    color: var(--primary-pink);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    position: relative;
+    padding-left: 10px;
+}
+
+.info-section h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 15px;
+    background: var(--gradient-sunset);
+    border-radius: 3px;
+}
+
+.recommend-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.recommend-item:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.recommend-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.recommend-info {
+    flex: 1;
+}
+
+.recommend-title {
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.recommend-desc {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.hot-topic {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 182, 193, 0.2);
+}
+
+.hot-count {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.ai-capability {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.capability-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--soft-shadow);
+}
+
+.capability-item i {
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+}
+
+.capability-item span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* 语音模态框 */
+.voice-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.voice-modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.voice-wave {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.voice-wave span {
+    width: 5px;
+    height: 20px;
+    background: var(--gradient-sunset);
+    border-radius: 5px;
+    animation: wave 1s ease-in-out infinite;
+}
+
+.voice-wave span:nth-child(2) { animation-delay: 0.1s; }
+.voice-wave span:nth-child(3) { animation-delay: 0.2s; }
+.voice-wave span:nth-child(4) { animation-delay: 0.3s; }
+.voice-wave span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes wave {
+    0%, 100% { height: 20px; }
+    50% { height: 50px; }
+}
+
+/* 响应式 */
+@media (max-width: 1200px) {
+    .ai-chat-container {
+        grid-template-columns: 250px 1fr 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .ai-chat-container {
+        grid-template-columns: 1fr;
+    }
+    .chat-sidebar, .chat-info-panel {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-header {
+        padding: 10px 15px;
+    }
+    .ai-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    .ai-title h2 {
+        font-size: 1.1rem;
+    }
+    .model-select {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+}

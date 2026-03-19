@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>创意工坊 - 动画艺术乐园</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/workshop.css">
+		<link rel="stylesheet" href="css/responsive.css">
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="nav-container">
+				<a href="index.html" class="logo">动画艺术乐园</a>
+				<div class="nav-links">
+					<a href="index.html" class="nav-link">首页</a>
+					<a href="library.html" class="nav-link">动画库</a>
+					<a href="ai-chat.html" class="nav-link">AI小灵</a>
+					<a href="workshop.html" class="nav-link active">创意工坊</a>
+					<a href="community.html" class="nav-link">社区</a>
+				</div>
+				<div class="user-menu">
+					<div class="user-avatar" onclick="location.href='profile.html'">
+						<img src="images/avatars/default-avatar.png" alt="用户头像">
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- 创意工坊主界面 -->
+		<div class="workshop-container">
+			<!-- 工坊导航 -->
+			<div class="workshop-nav">
+				<button class="workshop-nav-btn active" data-tab="draw">
+					<i class="fas fa-paint-brush"></i>
+					<span>动画涂鸦</span>
+				</button>
+				<button class="workshop-nav-btn" data-tab="emoji">
+					<i class="fas fa-face-smile"></i>
+					<span>表情包工坊</span>
+				</button>
+				<button class="workshop-nav-btn" data-tab="voice">
+					<i class="fas fa-microphone"></i>
+					<span>配音实验室</span>
+				</button>
+				<button class="workshop-nav-btn" data-tab="ai">
+					<i class="fas fa-robot"></i>
+					<span>AI创作</span>
+				</button>
+			</div>
+
+			<!-- 动画涂鸦区域 -->
+			<div class="workshop-tab active" id="drawTab">
+				<div class="draw-container">
+					<!-- 绘画工具栏 -->
+					<div class="draw-toolbar">
+						<div class="tool-group">
+							<button class="tool-btn active" data-tool="brush">
+								<i class="fas fa-paint-brush"></i>
+							</button>
+							<button class="tool-btn" data-tool="eraser">
+								<i class="fas fa-eraser"></i>
+							</button>
+							<button class="tool-btn" data-tool="fill">
+								<i class="fas fa-fill-drip"></i>
+							</button>
+							<button class="tool-btn" data-tool="text">
+								<i class="fas fa-font"></i>
+							</button>
+						</div>
+
+						<div class="tool-group">
+							<input type="color" id="colorPicker" value="#FFB6C1">
+							<input type="range" id="brushSize" min="1" max="50" value="5">
+							<span id="brushSizeValue">5px</span>
+						</div>
+
+						<div class="tool-group">
+							<button class="tool-btn" id="undoBtn">
+								<i class="fas fa-undo"></i>
+							</button>
+							<button class="tool-btn" id="redoBtn">
+								<i class="fas fa-redo"></i>
+							</button>
+							<button class="tool-btn" id="clearBtn">
+								<i class="fas fa-trash"></i>
+							</button>
+						</div>
+
+						<div class="tool-group">
+							<button class="btn btn-primary" id="saveDrawing">
+								<i class="fas fa-save"></i> 保存
+							</button>
+							<button class="btn btn-secondary" id="shareDrawing">
+								<i class="fas fa-share"></i> 分享
+							</button>
+						</div>
+					</div>
+
+					<!-- 画布区域 -->
+					<div class="canvas-container">
+						<canvas id="drawCanvas" width="800" height="500"></canvas>
+					</div>
+
+					<!-- AI辅助面板 -->
+					<div class="ai-assist-panel">
+						<h3><i class="fas fa-robot" style="color: var(--ai-purple);"></i> AI上色建议</h3>
+						<div class="ai-suggestions" id="aiSuggestions">
+							<div class="suggestion-item" data-colors="pink,blue,purple">
+								<div class="color-preview">
+									<span style="background: #FFB6C1;"></span>
+									<span style="background: #87CEEB;"></span>
+									<span style="background: #D8BFD8;"></span>
+								</div>
+								<span>梦幻渐变</span>
+							</div>
+							<div class="suggestion-item" data-colors="yellow,orange,red">
+								<div class="color-preview">
+									<span style="background: #FFD700;"></span>
+									<span style="background: #FFA500;"></span>
+									<span style="background: #FF6B6B;"></span>
+								</div>
+								<span>温暖阳光</span>
+							</div>
+							<div class="suggestion-item" data-colors="green,blue,cyan">
+								<div class="color-preview">
+									<span style="background: #98FB98;"></span>
+									<span style="background: #87CEEB;"></span>
+									<span style="background: #40E0D0;"></span>
+								</div>
+								<span>清新自然</span>
+							</div>
+						</div>
+
+						<div class="ai-prompt">
+							<textarea id="aiPrompt" placeholder="描述你想要的画风...例如：可爱的猫娘，粉色系"></textarea>
+							<button class="btn-ai-small" id="generateWithAI">
+								<i class="fas fa-magic"></i> AI生成线稿
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 表情包工坊区域 -->
+			<div class="workshop-tab" id="emojiTab">
+				<div class="emoji-container">
+					<div class="emoji-toolbar">
+						<button class="btn btn-primary" id="createEmoji">
+							<i class="fas fa-plus"></i> 新建表情
+						</button>
+						<div class="emoji-templates">
+							<span class="template-item" data-template="happy">😊</span>
+							<span class="template-item" data-template="sad">🥹</span>
+							<span class="template-item" data-template="angry">😠</span>
+							<span class="template-item" data-template="surprise">😲</span>
+							<span class="template-item" data-template="love">😍</span>
+							<span class="template-item" data-template="cry">😭</span>
+						</div>
+					</div>
+
+					<div class="emoji-editor">
+						<div class="emoji-preview" id="emojiPreview">
+							<img src="images/emoji/template.png" alt="表情预览">
+						</div>
+
+						<div class="emoji-controls">
+							<div class="control-group">
+								<label>眼睛</label>
+								<select id="eyeStyle">
+									<option value="normal">普通</option>
+									<option value="big">大眼睛</option>
+									<option value="sleepy">睡眼</option>
+									<option value="star">星星眼</option>
+								</select>
+							</div>
+
+							<div class="control-group">
+								<label>嘴巴</label>
+								<select id="mouthStyle">
+									<option value="smile">微笑</option>
+									<option value="laugh">大笑</option>
+									<option value="sad">悲伤</option>
+									<option value="surprise">惊讶</option>
+								</select>
+							</div>
+
+							<div class="control-group">
+								<label>腮红</label>
+								<input type="checkbox" id="blush">
+							</div>
+
+							<div class="control-group">
+								<label>表情文字</label>
+								<input type="text" id="emojiText" placeholder="例如：好耶！">
+							</div>
+						</div>
+					</div>
+
+					<div class="emoji-actions">
+						<button class="btn btn-primary" id="generateEmoji">
+							<i class="fas fa-wand-magic"></i> AI生成表情
+						</button>
+						<button class="btn btn-secondary" id="saveEmoji">
+							<i class="fas fa-save"></i> 保存
+						</button>
+						<button class="btn btn-secondary" id="shareEmoji">
+							<i class="fas fa-share"></i> 分享
+						</button>
+					</div>
+
+					<div class="emoji-gallery">
+						<h3>我的表情包</h3>
+						<div class="emoji-grid" id="emojiGallery">
+							<!-- 动态加载 -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 配音实验室区域 -->
+			<div class="workshop-tab" id="voiceTab">
+				<div class="voice-container">
+					<div class="voice-header">
+						<h2><i class="fas fa-microphone-alt"></i> 配音实验室</h2>
+						<p>选择经典片段，开始你的配音之旅</p>
+					</div>
+
+					<div class="voice-scenes">
+						<div class="scene-card active">
+							<img src="images/scenes/scene1.jpg" alt="场景1">
+							<div class="scene-info">
+								<h4>千与千寻 - 无脸男对话</h4>
+								<p>时长: 45秒</p>
+							</div>
+						</div>
+						<div class="scene-card">
+							<img src="images/scenes/scene2.jpg" alt="场景2">
+							<div class="scene-info">
+								<h4>你的名字。 - 黄昏之时</h4>
+								<p>时长: 60秒</p>
+							</div>
+						</div>
+						<div class="scene-card">
+							<img src="images/scenes/scene3.jpg" alt="场景3">
+							<div class="scene-info">
+								<h4>天气之子 - 雨过天晴</h4>
+								<p>时长: 50秒</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="voice-player">
+						<video id="sceneVideo" controls>
+							<source src="videos/scene1.mp4" type="video/mp4">
+						</video>
+					</div>
+
+					<div class="voice-controls">
+						<button class="btn btn-primary" id="startRecording">
+							<i class="fas fa-circle"></i> 开始录音
+						</button>
+						<button class="btn btn-secondary" id="stopRecording" disabled>
+							<i class="fas fa-stop"></i> 停止
+						</button>
+						<button class="btn btn-secondary" id="playRecording" disabled>
+							<i class="fas fa-play"></i> 播放
+						</button>
+
+						<div class="voice-filters">
+							<select id="voiceFilter">
+								<option value="none">原声</option>
+								<option value="child">萝莉音</option>
+								<option value="robot">机器人</option>
+								<option value="echo">回声</option>
+								<option value="reverb">混响</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="ai-voice-guidance">
+						<h3><i class="fas fa-robot"></i> AI配音指导</h3>
+						<div class="guidance-content" id="aiGuidance">
+							<p>🎯 这段场景中，角色的情绪是<strong>温柔中带着不舍</strong>，建议用轻柔的语气，语速放慢一些。</p>
+							<p>💡 重点台词："我不会忘记你的" - 这里可以加入一点哽咽的感觉</p>
+							<p>📊 音调建议：开头平稳，中间稍微升高，结尾渐弱</p>
+						</div>
+					</div>
+
+					<div class="voice-works">
+						<h3>我的配音作品</h3>
+						<div class="voice-grid" id="voiceWorks">
+							<!-- 动态加载 -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- AI创作区域 -->
+			<div class="workshop-tab" id="aiTab">
+				<div class="ai-creation-container">
+					<div class="ai-creation-header">
+						<h2><i class="fas fa-magic"></i> AI创意工坊</h2>
+						<p>让AI帮你实现天马行空的创意</p>
+					</div>
+
+					<div class="ai-creation-types">
+						<button class="creation-type active" data-type="story">
+							<i class="fas fa-book"></i>
+							<span>故事创作</span>
+						</button>
+						<button class="creation-type" data-type="character">
+							<i class="fas fa-user-astronaut"></i>
+							<span>角色设计</span>
+						</button>
+						<button class="creation-type" data-type="world">
+							<i class="fas fa-globe"></i>
+							<span>世界观构建</span>
+						</button>
+						<button class="creation-type" data-type="dialogue">
+							<i class="fas fa-comments"></i>
+							<span>台词生成</span>
+						</button>
+					</div>
+
+					<div class="ai-creation-workspace">
+						<!-- 故事创作 -->
+						<div class="creation-workspace active" id="storyWorkspace">
+							<div class="input-panel">
+								<h4>输入你的创意灵感</h4>
+								<textarea id="storyInput" placeholder="例如：一个关于魔法少女和猫咪的治愈故事，发生在星空下的城市..."></textarea>
+
+								<div class="input-options">
+									<div class="option-group">
+										<label>风格</label>
+										<select id="storyStyle">
+											<option value="cute">治愈可爱</option>
+											<option value="fantasy">奇幻冒险</option>
+											<option value="sci-fi">科幻未来</option>
+											<option value="school">校园青春</option>
+										</select>
+									</div>
+
+									<div class="option-group">
+										<label>长度</label>
+										<select id="storyLength">
+											<option value="short">短篇 (500字)</option>
+											<option value="medium">中篇 (1000字)</option>
+											<option value="long">长篇 (2000字)</option>
+										</select>
+									</div>
+								</div>
+
+								<button class="btn btn-primary" id="generateStory">
+									<i class="fas fa-wand-magic"></i> AI生成故事
+								</button>
+							</div>
+
+							<div class="output-panel" id="storyOutput">
+								<h4>AI生成结果</h4>
+								<div class="output-content">
+									<p class="placeholder">点击生成按钮，AI将为你创作一个精彩的故事...</p>
+								</div>
+								<div class="output-actions">
+									<button class="btn btn-secondary" id="saveStory">
+										<i class="fas fa-save"></i> 保存
+									</button>
+									<button class="btn btn-secondary" id="shareStory">
+										<i class="fas fa-share"></i> 分享
+									</button>
+									<button class="btn btn-secondary" id="regenerateStory">
+										<i class="fas fa-redo"></i> 重新生成
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- 角色设计 -->
+						<div class="creation-workspace" id="characterWorkspace">
+							<div class="input-panel">
+								<h4>描述你的角色</h4>
+								<textarea id="characterInput" placeholder="例如：16岁的魔法少女，粉色长发，喜欢唱歌，性格活泼开朗..."></textarea>
+
+								<div class="input-options">
+									<div class="option-group">
+										<label>类型</label>
+										<select id="characterType">
+											<option value="human">人类</option>
+											<option value="animal">兽人</option>
+											<option value="magic">魔法生物</option>
+											<option value="robot">机器人</option>
+										</select>
+									</div>
+
+									<div class="option-group">
+										<label>年龄</label>
+										<select id="characterAge">
+											<option value="child">儿童</option>
+											<option value="teen">少年</option>
+											<option value="adult">成年</option>
+											<option value="elder">老年</option>
+										</select>
+									</div>
+								</div>
+
+								<button class="btn btn-primary" id="generateCharacter">
+									<i class="fas fa-wand-magic"></i> AI设计角色
+								</button>
+							</div>
+
+							<div class="output-panel" id="characterOutput">
+								<h4>AI设计结果</h4>
+								<div class="character-design">
+									<div class="character-avatar">
+										<img src="images/characters/placeholder.png" alt="角色形象" id="characterImage">
+									</div>
+									<div class="character-details" id="characterDetails">
+										<!-- 动态填充 -->
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- 世界观构建 -->
+						<div class="creation-workspace" id="worldWorkspace">
+							<div class="input-panel">
+								<h4>描述你的世界</h4>
+								<textarea id="worldInput" placeholder="例如：一个漂浮在天空中的岛屿，居民可以在云朵上行走，用星星作为能源..."></textarea>
+
+								<div class="input-options">
+									<div class="option-group">
+										<label>时代</label>
+										<select id="worldEra">
+											<option value="ancient">古代</option>
+											<option value="modern">现代</option>
+											<option value="future">未来</option>
+											<option value="fantasy">奇幻</option>
+										</select>
+									</div>
+								</div>
+
+								<button class="btn btn-primary" id="generateWorld">
+									<i class="fas fa-wand-magic"></i> AI构建世界
+								</button>
+							</div>
+
+							<div class="output-panel" id="worldOutput">
+								<h4>AI构建结果</h4>
+								<div class="world-map">
+									<img src="images/worlds/placeholder.jpg" alt="世界观地图" id="worldMap">
+								</div>
+								<div class="world-details" id="worldDetails"></div>
+							</div>
+						</div>
+
+						<!-- 台词生成 -->
+						<div class="creation-workspace" id="dialogueWorkspace">
+							<div class="input-panel">
+								<h4>场景和角色</h4>
+								<textarea id="dialogueInput" placeholder="例如：男主角向女主角告白的场景，男主角害羞，女主角傲娇..."></textarea>
+
+								<div class="input-options">
+									<div class="option-group">
+										<label>语气</label>
+										<select id="dialogueTone">
+											<option value="sweet">甜蜜</option>
+											<option value="sad">悲伤</option>
+											<option value="funny">搞笑</option>
+											<option value="serious">严肃</option>
+										</select>
+									</div>
+								</div>
+
+								<button class="btn btn-primary" id="generateDialogue">
+									<i class="fas fa-wand-magic"></i> AI生成台词
+								</button>
+							</div>
+
+							<div class="output-panel" id="dialogueOutput">
+								<h4>AI生成台词</h4>
+								<div class="dialogue-box">
+									<!-- 动态填充 -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="ai-creations-history">
+						<h3>创作历史</h3>
+						<div class="history-grid" id="creationHistory">
+							<!-- 动态加载 -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- AI助手浮动按钮 -->
+		<div class="ai-assistant-float">
+			<button class="ai-float-btn" onclick="location.href='ai-chat.html'">
+				<img src="images/icons/ai-icon.png" alt="AI助手">
+			</button>
+			<span class="ai-tooltip">需要创作灵感？</span>
+		</div>
+
+		<script src="js/workshop.js"></script>
+	</body>
+</html>

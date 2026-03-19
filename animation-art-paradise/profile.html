@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 动画艺术乐园</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">动画艺术乐园</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="library.html" class="nav-link">动画库</a>
+                <a href="ai-chat.html" class="nav-link">AI小灵</a>
+                <a href="workshop.html" class="nav-link">创意工坊</a>
+                <a href="community.html" class="nav-link">社区</a>
+            </div>
+            <div class="user-menu">
+                <div class="user-avatar active" onclick="location.href='profile.html'">
+                    <img src="images/avatars/default-avatar.png" alt="用户头像">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 个人中心主界面 -->
+    <div class="profile-container">
+        <!-- 侧边导航 -->
+        <div class="profile-sidebar">
+            <div class="user-card">
+                <div class="user-avatar-large" id="userAvatar">
+                    <img src="images/avatars/user-avatar.jpg" alt="用户头像">
+                    <button class="change-avatar-btn" id="changeAvatar">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <h2 class="user-name" id="userName">梦幻画师</h2>
+                <p class="user-bio" id="userBio">热爱动画的创作者，喜欢画画和配音</p>
+                
+                <div class="user-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="followerCount">128</span>
+                        <span class="stat-label">粉丝</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="followingCount">56</span>
+                        <span class="stat-label">关注</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="workCount">23</span>
+                        <span class="stat-label">作品</span>
+                    </div>
+                </div>
+                
+                <div class="user-badges">
+                    <span class="badge" title="资深动画迷">🎬 资深动画迷</span>
+                    <span class="badge" title="创意大师">🎨 创意大师</span>
+                    <span class="badge-ai" title="AI高级用户">🤖 AI高级</span>
+                </div>
+                
+                <div class="user-ai-stats">
+                    <h4><i class="fas fa-robot"></i> AI使用统计</h4>
+                    <div class="ai-stat-item">
+                        <span>对话次数</span>
+                        <span id="aiChatCount">156</span>
+                    </div>
+                    <div class="ai-stat-item">
+                        <span>创作次数</span>
+                        <span id="aiCreateCount">89</span>
+                    </div>
+                    <div class="ai-stat-item">
+                        <span>Tokens使用</span>
+                        <span id="aiTokensUsed">12,345</span>
+                    </div>
+                    <div class="ai-progress">
+                        <div class="progress-bar" style="width: 45%"></div>
+                        <span>下一级还需 55%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-nav">
+                <button class="profile-nav-btn active" data-section="profile">
+                    <i class="fas fa-user"></i> 个人资料
+                </button>
+                <button class="profile-nav-btn" data-section="favorites">
+                    <i class="fas fa-heart"></i> 我的收藏
+                </button>
+                <button class="profile-nav-btn" data-section="works">
+                    <i class="fas fa-paint-brush"></i> 我的作品
+                </button>
+                <button class="profile-nav-btn" data-section="ai-history">
+                    <i class="fas fa-robot"></i> AI对话历史
+                </button>
+                <button class="profile-nav-btn" data-section="settings">
+                    <i class="fas fa-cog"></i> 设置
+                </button>
+            </div>
+            
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+            </button>
+        </div>
+        
+        <!-- 主内容区域 -->
+        <div class="profile-content">
+            <!-- 个人资料 -->
+            <div class="profile-section active" id="profileSection">
+                <h2 class="section-title">个人资料</h2>
+                
+                <form id="profileForm" class="profile-form">
+                    <div class="form-group">
+                        <label>用户名</label>
+                        <input type="text" id="editUsername" value="梦幻画师" placeholder="输入用户名">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>个人简介</label>
+                        <textarea id="editBio" placeholder="介绍一下自己吧...">热爱动画的创作者，喜欢画画和配音</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>邮箱</label>
+                        <input type="email" id="editEmail" value="dream.artist@example.com" placeholder="输入邮箱">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>手机号</label>
+                        <input type="tel" id="editPhone" value="138****1234" placeholder="输入手机号">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>生日</label>
+                        <input type="date" id="editBirthday" value="2000-01-01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>兴趣标签</label>
+                        <div class="interest-tags">
+                            <span class="interest-tag selected">治愈系</span>
+                            <span class="interest-tag">奇幻</span>
+                            <span class="interest-tag">科幻</span>
+                            <span class="interest-tag selected">恋爱</span>
+                            <span class="interest-tag">热血</span>
+                            <span class="interest-tag selected">宫崎骏</span>
+                            <span class="interest-tag">新海诚</span>
+                            <span class="interest-tag">京阿尼</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存修改</button>
+                    </div>
+                </form>
+                
+                <div class="ai-preferences">
+                    <h3>AI个性化设置</h3>
+                    <div class="preference-item">
+                        <label>
+                            <input type="checkbox" checked> AI记住我的对话偏好
+                        </label>
+                    </div>
+                    <div class="preference-item">
+                        <label>
+                            <input type="checkbox" checked> 自动保存创作历史
+                        </label>
+                    </div>
+                    <div class="preference-item">
+                        <label>AI回复风格</label>
+                        <select id="aiStyle">
+                            <option value="friendly" selected>友好亲切</option>
+                            <option value="professional">专业详细</option>
+                            <option value="creative">创意幽默</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 我的收藏 -->
+            <div class="profile-section" id="favoritesSection">
+                <h2 class="section-title">我的收藏</h2>
+                
+                <div class="favorites-tabs">
+                    <button class="favorite-tab active" data-type="animation">动画</button>
+                    <button class="favorite-tab" data-type="artwork">作品</button>
+                    <button class="favorite-tab" data-type="topic">话题</button>
+                </div>
+                
+                <div class="favorites-grid" id="favoritesGrid">
+                    <!-- 动态加载收藏内容 -->
+                </div>
+            </div>
+            
+            <!-- 我的作品 -->
+            <div class="profile-section" id="worksSection">
+                <h2 class="section-title">我的作品</h2>
+                
+                <div class="works-tabs">
+                    <button class="work-tab active" data-type="drawing">绘画</button>
+                    <button class="work-tab" data-type="emoji">表情</button>
+                    <button class="work-tab" data-type="voice">配音</button>
+                    <button class="work-tab" data-type="creation">AI创作</button>
+                </div>
+                
+                <div class="works-grid" id="worksGrid">
+                    <!-- 动态加载作品 -->
+                </div>
+            </div>
+            
+            <!-- AI对话历史 -->
+            <div class="profile-section" id="aiHistorySection">
+                <h2 class="section-title">AI对话历史</h2>
+                
+                <div class="ai-history-search">
+                    <input type="text" placeholder="搜索对话内容...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="ai-history-list" id="aiHistoryList">
+                    <!-- 动态加载历史对话 -->
+                </div>
+            </div>
+            
+            <!-- 设置 -->
+            <div class="profile-section" id="settingsSection">
+                <h2 class="section-title">设置</h2>
+                
+                <div class="settings-group">
+                    <h3>账户安全</h3>
+                    <div class="setting-item">
+                        <span>修改密码</span>
+                        <button class="btn btn-secondary btn-small">去修改</button>
+                    </div>
+                    <div class="setting-item">
+                        <span>绑定手机</span>
+                        <span class="setting-status">已绑定 138****1234</span>
+                    </div>
+                    <div class="setting-item">
+                        <span>绑定邮箱</span>
+                        <span class="setting-status">已绑定 d***@example.com</span>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h3>通知设置</h3>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" checked> 社区互动通知
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" checked> 作品评论通知
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox"> 私信通知
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h3>隐私设置</h3>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox"> 公开我的收藏
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" checked> 允许AI分析我的偏好
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="settings-group danger-zone">
+                    <h3>危险区域</h3>
+                    <div class="setting-item">
+                        <span>注销账号</span>
+                        <button class="btn btn-danger btn-small">注销</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>
